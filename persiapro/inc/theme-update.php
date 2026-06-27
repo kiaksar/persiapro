@@ -65,7 +65,15 @@ function persiapro_get_github_release() {
 
 	$response = wp_remote_get( $url, $args );
 
-	if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+	if ( is_wp_error( $response ) ) {
+		error_log( 'PersiaPro Update Error: ' . $response->get_error_message() );
+		set_transient( $cache_key, '', HOUR_IN_SECONDS );
+		return null;
+	}
+
+	$status_code = wp_remote_retrieve_response_code( $response );
+	if ( 200 !== $status_code ) {
+		error_log( 'PersiaPro Update Error: GitHub API returned status ' . $status_code );
 		set_transient( $cache_key, '', HOUR_IN_SECONDS );
 		return null;
 	}
