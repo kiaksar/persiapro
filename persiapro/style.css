@@ -4,7 +4,7 @@ Theme URI: https://github.com/kiaksar/persiapro
 Author: kiaksar
 Author URI: https://github.com/kiaksar
 Description: A modern, professional, RTL-first WordPress theme designed for corporate and company websites with full Farsi/Persian support. Fully customizable via the WordPress Customizer, Gutenberg-ready, and multilingual-compatible.
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -227,6 +227,39 @@ ul, ol {
 
 .pp-top-bar__social a:hover {
 	color: var(--pp-accent);
+}
+
+/* Language Switcher */
+.pp-language-switcher {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.pp-lang-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 36px;
+	height: 28px;
+	padding: 0 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+	text-decoration: none;
+	transition: all var(--pp-transition);
+}
+
+.pp-lang-btn:hover {
+	background: rgba(255, 255, 255, 0.25);
+	color: #fff;
+}
+
+.pp-lang-btn--current {
+	background: rgba(255, 255, 255, 0.3);
+	cursor: default;
 }
 
 /* ==========================================================================

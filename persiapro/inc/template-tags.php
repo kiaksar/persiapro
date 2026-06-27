@@ -373,3 +373,48 @@ function persiapro_comment_callback( $comment, $args, $depth ) {
 		</article>
 	<?php
 }
+
+/**
+ * Display language switcher (Polylang compatible).
+ *
+ * Shows FA/EN buttons in the top bar for switching between Persian and English.
+ */
+function persiapro_language_switcher() {
+	// Check if Polylang is active
+	if ( ! function_exists( 'pll_the_languages' ) ) {
+		return;
+	}
+
+	$languages = pll_the_languages( array(
+		'show_flags' => false,
+		'show_names' => false,
+		'hide_current' => true,
+		'raw' => true,
+	) );
+
+	if ( empty( $languages ) ) {
+		return;
+	}
+
+	$current_lang = pll_current_language();
+	$lang_slug = $current_lang ? $current_lang : 'fa';
+
+	echo '<div class="pp-language-switcher">';
+
+	// Current language button (inactive)
+	$current_label = 'fa' === $lang_slug ? 'FA' : 'EN';
+	echo '<span class="pp-lang-btn pp-lang-btn--current">' . esc_html( $current_label ) . '</span>';
+
+	// Other language buttons (active links)
+	foreach ( $languages as $lang ) {
+		$label = 'fa' === $lang['slug'] ? 'FA' : 'EN';
+		printf(
+			'<a href="%1$s" class="pp-lang-btn" hreflang="%2$s">%3$s</a>',
+			esc_url( $lang['url'] ),
+			esc_attr( $lang['slug'] ),
+			esc_html( $label )
+		);
+	}
+
+	echo '</div>';
+}
