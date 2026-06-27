@@ -332,11 +332,11 @@ function persiapro_customizer_header( $wp_customize ) {
 			'capability'        => 'edit_theme_options',
 			'sanitize_callback' => 'esc_url_raw',
 		) );
-		$wp_customize->add_control( 'persiapro_social_' . $key, array(
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'persiapro_social_' . key . '_icon', array(
 			'label'   => $label,
 			'section' => 'persiapro_header_social',
 			'settings' => 'persiapro_social_' . $key . '_icon',
-		) );
+		) ) );
 	}
 }
 
