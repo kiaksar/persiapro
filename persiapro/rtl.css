@@ -1,0 +1,163 @@
+/**
+ * PersiaPro RTL Overrides
+ *
+ * Additional RTL-specific styles. The main stylesheet uses logical properties
+ * (margin-inline, padding-inline, inset-inline) for RTL-first layout.
+ * This file handles legacy overrides and LTR locale support.
+ *
+ * @package PersiaPro
+ * @since 1.0.0
+ */
+
+/* Font smoothing for Persian text */
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+/* Ensure proper Persian numeral and punctuation flow */
+.pp-post-card__meta,
+.pp-breadcrumb,
+.pp-top-bar {
+	unicode-bidi: embed;
+}
+
+/* Navigation dropdown alignment in RTL */
+.pp-nav__list .sub-menu {
+	inset-inline-start: 0;
+	inset-inline-end: auto;
+}
+
+/* Mobile nav slides from right in RTL */
+@media (max-width: 768px) {
+	.pp-nav {
+		inset-inline-end: -100%;
+		inset-inline-start: auto;
+	}
+
+	.pp-nav.is-open {
+		inset-inline-end: 0;
+	}
+}
+
+/* Back to top positioned on left in RTL */
+.pp-back-to-top {
+	inset-inline-start: 2rem;
+	inset-inline-end: auto;
+}
+
+/* Post navigation arrows */
+.pp-post-nav__prev {
+	text-align: start;
+}
+
+.pp-post-nav__next {
+	text-align: end;
+}
+
+/* Read more arrow direction */
+.pp-read-more span {
+	display: inline-block;
+}
+
+/* WooCommerce RTL */
+.woocommerce .quantity .qty {
+	text-align: center;
+}
+
+/* Gutenberg block alignment in RTL */
+.wp-block-pullquote {
+	text-align: center;
+}
+
+.has-text-align-left {
+	text-align: left;
+}
+
+.has-text-align-right {
+	text-align: right;
+}
+
+/* LTR override when site language is not RTL */
+html[dir="ltr"] body {
+	direction: ltr;
+	text-align: left;
+}
+
+html[dir="ltr"] .pp-nav__list {
+	justify-content: flex-end;
+}
+
+html[dir="ltr"] .pp-back-to-top {
+	inset-inline-start: auto;
+	inset-inline-end: 2rem;
+}
+
+html[dir="ltr"] .pp-read-more span {
+	transform: scaleX(-1);
+}
+
+/* Float reversals for legacy widgets */
+html[dir="rtl"] .alignleft {
+	float: right;
+	margin-inline-start: 1.5em;
+	margin-inline-end: 0;
+}
+
+html[dir="rtl"] .alignright {
+	float: left;
+	margin-inline-end: 1.5em;
+	margin-inline-start: 0;
+}
+
+html[dir="ltr"] .alignleft {
+	float: left;
+	margin-right: 1.5em;
+	margin-left: 0;
+}
+
+html[dir="ltr"] .alignright {
+	float: right;
+	margin-left: 1.5em;
+	margin-right: 0;
+}
+
+/* Pagination */
+.navigation.pagination .nav-links {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.navigation.pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 0.75rem;
+	border-radius: var(--pp-radius);
+	background: var(--pp-bg-alt);
+	color: var(--pp-text);
+	transition: all var(--pp-transition);
+}
+
+.navigation.pagination .page-numbers.current,
+.navigation.pagination .page-numbers:hover {
+	background: var(--pp-primary);
+	color: #fff;
+}
+
+/* Social icons font */
+@font-face {
+	font-family: 'FontAwesome';
+	src: local('Arial');
+	font-display: swap;
+}
+
+.pp-icon {
+	font-family: 'FontAwesome', sans-serif;
+	font-style: normal;
+}
