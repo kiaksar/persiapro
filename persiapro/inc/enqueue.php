@@ -35,14 +35,13 @@ function persiapro_enqueue_assets() {
 		PERSIAPRO_VERSION
 	);
 
-	if ( is_rtl() ) {
-		wp_enqueue_style(
-			'persiapro-rtl',
-			PERSIAPRO_URI . '/rtl.css',
-			array( 'persiapro-style' ),
-			PERSIAPRO_VERSION
-		);
-	}
+	// Always load RTL/LTR direction CSS for language switching support
+	wp_enqueue_style(
+		'persiapro-rtl',
+		PERSIAPRO_URI . '/rtl.css',
+		array( 'persiapro-style' ),
+		PERSIAPRO_VERSION
+	);
 
 	wp_enqueue_style(
 		'persiapro-main',
