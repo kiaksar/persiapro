@@ -253,16 +253,16 @@ function persiapro_social_icons( $context = 'footer' ) {
 
 	foreach ( $networks as $key => $network ) {
 		$url = get_theme_mod( 'persiapro_social_' . $key, '' );
-		
+
 		if ( ! empty( $url ) ) {
 			// Get custom image URL from theme mod
 			$icon_url = get_theme_mod( 'persiapro_social_' . $key . '_icon', '' );
-			
-			// Fallback: you can keep Unicode or use a default image
-			if ( empty( $icon_url ) ) {
-				$icon_html = '<span class="pp-icon" aria-hidden="true">' . ($networks[$key]['icon'] ?? '&#xf16d;') . '</span>';
-			} else {
+
+			// Use custom image if available, otherwise show label
+			if ( ! empty( $icon_url ) ) {
 				$icon_html = '<img src="' . esc_url( $icon_url ) . '" alt="' . esc_attr( $network['label'] ) . '" class="pp-social-icon" width="24" height="24">';
+			} else {
+				$icon_html = '<span class="pp-social-label">' . esc_html( $network['label'] ) . '</span>';
 			}
 
 			printf(

@@ -327,14 +327,26 @@ function persiapro_customizer_header( $wp_customize ) {
 	);
 
 	foreach ( $socials as $key => $label ) {
+		// URL setting
+		$wp_customize->add_setting( 'persiapro_social_' . $key, array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+		) );
+		$wp_customize->add_control( 'persiapro_social_' . $key, array(
+			'label'   => $label,
+			'section' => 'persiapro_header_social',
+			'type'    => 'url',
+		) );
+
+		// Icon image setting
 		$wp_customize->add_setting( 'persiapro_social_' . $key . '_icon', array(
 			'type'              => 'theme_mod',
 			'capability'        => 'edit_theme_options',
 			'sanitize_callback' => 'esc_url_raw',
 		) );
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'persiapro_social_' . key . '_icon', array(
-			'label'   => $label,
-			'section' => 'persiapro_header_social',
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'persiapro_social_' . $key . '_icon', array(
+			'label'    => $label . ' ' . esc_html__( 'Icon', 'persiapro' ),
+			'section'  => 'persiapro_header_social',
 			'settings' => 'persiapro_social_' . $key . '_icon',
 		) ) );
 	}
