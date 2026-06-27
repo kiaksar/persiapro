@@ -212,37 +212,31 @@ function persiapro_social_icons( $context = 'footer' ) {
 	$networks = array(
 		'instagram' => array(
 			'label' => 'Instagram',
-			'icon'  => '&#xf16d;',
 		),
 		'telegram'  => array(
 			'label' => 'Telegram',
-			'icon'  => '&#xf2c6;',
 		),
 		'linkedin'  => array(
 			'label' => 'LinkedIn',
-			'icon'  => '&#xf0e1;',
 		),
 		'twitter'   => array(
 			'label' => 'Twitter / X',
-			'icon'  => '&#xf099;',
 		),
 		'facebook'  => array(
 			'label' => 'Facebook',
-			'icon'  => '&#xf09a;',
 		),
 		'youtube'   => array(
 			'label' => 'YouTube',
-			'icon'  => '&#xf167;',
 		),
 		'whatsapp'  => array(
 			'label' => 'WhatsApp',
-			'icon'  => '&#xf232;',
 		),
 	);
 
 	$class = 'footer' === $context ? 'pp-footer-social' : 'pp-top-bar__social';
 	$has_icons = false;
 
+	// First pass: check if any social link exists
 	foreach ( $networks as $key => $network ) {
 		$url = get_theme_mod( 'persiapro_social_' . $key, '' );
 		if ( ! empty( $url ) ) {
@@ -259,12 +253,23 @@ function persiapro_social_icons( $context = 'footer' ) {
 
 	foreach ( $networks as $key => $network ) {
 		$url = get_theme_mod( 'persiapro_social_' . $key, '' );
+		
 		if ( ! empty( $url ) ) {
+			// Get custom image URL from theme mod
+			$icon_url = get_theme_mod( 'persiapro_social_' . $key . '_icon', '' );
+			
+			// Fallback: you can keep Unicode or use a default image
+			if ( empty( $icon_url ) ) {
+				$icon_html = '<span class="pp-icon" aria-hidden="true">' . ($networks[$key]['icon'] ?? '&#xf16d;') . '</span>';
+			} else {
+				$icon_html = '<img src="' . esc_url( $icon_url ) . '" alt="' . esc_attr( $network['label'] ) . '" class="pp-social-icon" width="24" height="24">';
+			}
+
 			printf(
-				'<a href="%1$s" target="_blank" rel="noopener noreferrer" aria-label="%2$s"><span class="pp-icon" aria-hidden="true">%3$s</span></a>',
+				'<a href="%1$s" target="_blank" rel="noopener noreferrer" aria-label="%2$s">%3$s</a>',
 				esc_url( $url ),
 				esc_attr( $network['label'] ),
-				$network['icon'] // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				$icon_html
 			);
 		}
 	}

@@ -41,7 +41,7 @@ $hide_header = is_page_template( 'page-templates/template-no-header-footer.php' 
 					<?php endif; ?>
 				</div>
 				<?php persiapro_language_switcher(); ?>
-				<?php persiapro_social_icons( 'topbar' ); ?>
+				<!-- <?php persiapro_social_icons( 'topbar' ); ?> -->
 			</div>
 		</div>
 	</div>

@@ -327,14 +327,15 @@ function persiapro_customizer_header( $wp_customize ) {
 	);
 
 	foreach ( $socials as $key => $label ) {
-		$wp_customize->add_setting( 'persiapro_social_' . $key, array(
-			'default'           => '',
+		$wp_customize->add_setting( 'persiapro_social_' . $key . '_icon', array(
+			'type'              => 'theme_mod',
+			'capability'        => 'edit_theme_options',
 			'sanitize_callback' => 'esc_url_raw',
 		) );
 		$wp_customize->add_control( 'persiapro_social_' . $key, array(
 			'label'   => $label,
 			'section' => 'persiapro_header_social',
-			'type'    => 'url',
+			'settings' => 'persiapro_social_' . $key . '_icon',
 		) );
 	}
 }
