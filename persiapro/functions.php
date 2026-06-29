@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PERSIAPRO_VERSION', '1.3.6' );
+define( 'PERSIAPRO_VERSION', '1.3.7' );
 define( 'PERSIAPRO_DIR', get_template_directory() );
 define( 'PERSIAPRO_URI', get_template_directory_uri() );
 
